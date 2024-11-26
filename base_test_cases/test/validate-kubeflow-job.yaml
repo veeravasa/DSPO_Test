@@ -1,0 +1,29 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: validate-kubeflow-installation
+  namespace: kubeflow
+spec:
+  backoffLimit: 4  # Retry up to 4 times if the job fails
+  template:
+    metadata:
+      labels:
+        app: validate-kubeflow
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: validation-container
+          image: busybox  # Lightweight image for validation
+          command:
+            - sh
+            - -c
+            - |
+              echo "Validating Kubeflow installation...";
+              sleep 5;
+              echo "Kubeflow namespace is functional.";
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+

@@ -9,8 +9,11 @@
  
 """This Pytest local plugin creates some basic objects for testing purposes"""
  
-
+from __future__ import unicode_literals, absolute_import
 import pytest
+from mock import patch
+from .. import HostUnderTest
+from ..interface import PublicInterface
 import subprocess
 import time
 
